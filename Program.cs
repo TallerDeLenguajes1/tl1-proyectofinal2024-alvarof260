@@ -1,2 +1,13 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using utils;
+
+class Program
+{
+  static void Main(string[] args)
+  {
+    Console.ForegroundColor = ConsoleColor.Red;
+    Utils.TextCenter(Console.WindowWidth, "Bienvenido al juego 'Mundo Clash'");
+    Console.ResetColor();
+  }
+
+}
+
