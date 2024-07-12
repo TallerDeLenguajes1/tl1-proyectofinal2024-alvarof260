@@ -23,7 +23,12 @@ namespace EldenRing
 
     public class Root
     {
-        public List<Datos> Data { get; set; }
+        [JsonPropertyName("data")]
+        public List<Datos> Datos { get; set; }
+        public Root(List<Datos> Datos)
+        {
+            this.Datos = Datos;
+        }
     }
 
     public class Estadisticas
