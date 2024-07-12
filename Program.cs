@@ -1,64 +1,51 @@
-﻿using utils;
-using System.Text;
+﻿using System;
 
-class Program
+namespace EldenRing
 {
-  /*Encapsular la logica y hacerlo reutilizable*/
-
-  static void Main(string[] args)
+  class Program
   {
-    Console.Clear();
-    Console.OutputEncoding = Encoding.UTF8;
-    Console.CursorVisible = false;
-    Console.ForegroundColor = ConsoleColor.Red;
-    Utils.TextCenter(Console.WindowWidth, "🏹🗡️ Bienvenido al juego 'Mundo Clash' 🗡️🏹");
-    Console.ResetColor();
-    Utils.TextCenter(Console.WindowWidth, "     Moverse con \u001b[32mW ⬆️  y S ⬇️  \u001b[0m en el Menu");
-    (int left, int top) = Console.GetCursorPosition();
-    bool isSelected = false;
-    ConsoleKeyInfo key;
-    int option = 1;
-    string decorator = "\u001b[32m";
-
-    while (!isSelected)
+    static void Main()
     {
-      // Guardar la posición actual del cursor
-      int currentTop = top;
-
-      // Borrar las líneas de las opciones antes de volver a imprimirlas
-      ClearLine(left, currentTop);
-      ClearLine(left, currentTop + 1);
-      Console.SetCursorPosition(left, top);
-      Utils.TextCenter(Console.WindowWidth, $"{(option == 1 ? decorator : " ")}1 - Jugar 👾\u001b[0m");
-      Utils.TextCenter(Console.WindowWidth, $"{(option == 2 ? decorator : " ")}2 - Salir 👋\u001b[0m");
-
-      key = Console.ReadKey(false);
-
-      switch (key.Key)
-      {
-        case ConsoleKey.UpArrow:
-          if (option > 1) option--;
-          break;
-        case ConsoleKey.DownArrow:
-          if (option < 2) option++;
-          break;
-        case ConsoleKey.Enter:
-          isSelected = true;
-          break;
-        case ConsoleKey.Escape:
-          Environment.Exit(0);
-          break;
-      }
+      Start();
     }
 
-    Console.WriteLine("Seleccionaste la opcion " + option);
+    static void Start()
+    {
+      Console.WriteLine("Bienvenido a Elden Ring RPG Console");
+      Console.WriteLine("Elija su personaje");
+      Estadisticas stats = new Estadisticas(
+                Nivel: "10",
+                Vigor: "20",
+                Mente: "15",
+                Aguante: "18",
+                Fuerza: "22",
+                Destreza: "19",
+                Inteligencia: "14",
+                Fe: "12",
+                Arcano: "16"
+            );
 
-  }
+      Datos datos = new Datos(
+          Id: "001",
+          Nombre: "Guerrero",
+          Descripcion: "Un valiente guerrero con gran fuerza y Aguante.",
+          Estadisticas: stats
+      );
 
-  private static void ClearLine(int left, int top)
-  {
-    Console.SetCursorPosition(left, top);
-    Console.WriteLine(new string(' ', Console.WindowWidth));
+      Personaje personaje = new Personaje(datos);
+
+      Console.WriteLine($"Nombre: {personaje.Datos.Nombre}");
+      Console.WriteLine($"Descripción: {personaje.Datos.Descripcion}");
+      Console.WriteLine("Estadísticas:");
+      Console.WriteLine($"  Nivel: {personaje.Datos.Estadisticas.Nivel}");
+      Console.WriteLine($"  Vigor: {personaje.Datos.Estadisticas.Vigor}");
+      Console.WriteLine($"  Mente: {personaje.Datos.Estadisticas.Mente}");
+      Console.WriteLine($"  Aguante: {personaje.Datos.Estadisticas.Aguante}");
+      Console.WriteLine($"  Fuerza: {personaje.Datos.Estadisticas.Fuerza}");
+      Console.WriteLine($"  Destreza: {personaje.Datos.Estadisticas.Destreza}");
+      Console.WriteLine($"  Inteligencia: {personaje.Datos.Estadisticas.Inteligencia}");
+      Console.WriteLine($"  Fe: {personaje.Datos.Estadisticas.Fe}");
+      Console.WriteLine($"  Arcano: {personaje.Datos.Estadisticas.Arcano}");
+    }
   }
 }
-
