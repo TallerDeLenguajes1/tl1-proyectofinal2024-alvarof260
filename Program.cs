@@ -20,7 +20,16 @@ namespace EldenRing
 
       // Obtener datos de la API
       List<Datos> personajes = await apiClient.GetPersonajesAsync();
-      Console.WriteLine(personajes.ElementAt(1).Nombre);
+      string archivoJson = "personajes.json";
+      JsonDB.GuardanEnJson(personajes, archivoJson);
+
+      List<Datos> personajesGuardado = JsonDB.LeerEnJson(archivoJson);
+
+      foreach (var personaje in personajesGuardado)
+      {
+        Console.WriteLine(personaje.Nombre);
+      }
+
     }
   }
 }
