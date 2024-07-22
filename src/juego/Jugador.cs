@@ -2,9 +2,19 @@ using System;
 
 namespace Proyecto
 {
+    public enum TipoJugador
+    {
+        Guerrero = 1,
+        Caballero,
+        Bandido,
+        Clerigo,
+        Marginado,
+        Asesino,
+        Hechicero
+    }
     public class Jugador
     {
-        public string Tipo { get; set; }
+        public TipoJugador Tipo { get; set; }
         public string Nombre { get; set; }
         public string Apodo { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
@@ -28,7 +38,7 @@ namespace Proyecto
 
         private static readonly Random random = new Random();
 
-        public Jugador(string tipo, string nombre, string apodo, DateTime fechaDeNacimiento)
+        public Jugador(TipoJugador tipo, string nombre, string apodo, DateTime fechaDeNacimiento)
         {
             Tipo = tipo;
             Nombre = nombre;
