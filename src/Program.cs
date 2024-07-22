@@ -98,6 +98,11 @@ namespace Proyecto
       Console.Clear();
       nuevoJugador.MostrarJugador();
       Console.ReadKey();
+      List<Jugador> jugadores = FabricaDePersonajes.ListaDePersonajes(8);
+      foreach (var jugador in jugadores)
+      {
+        jugador.MostrarJugador();
+      }
       //! hacer la logica del combate
     }
   }
