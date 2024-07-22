@@ -99,7 +99,6 @@ namespace Proyecto
       nuevoJugador.MostrarJugador();
       Console.ReadKey();
       //! hacer la logica del combate
-      Console.WriteLine("Combate");
     }
   }
 }
