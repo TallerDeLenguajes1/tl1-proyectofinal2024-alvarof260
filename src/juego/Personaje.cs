@@ -2,7 +2,7 @@ using System;
 
 namespace Proyecto
 {
-    public enum TipoJugador
+    public enum TipoPersonaje
     {
         Guerrero = 1,
         Caballero,
@@ -12,9 +12,9 @@ namespace Proyecto
         Asesino,
         Hechicero
     }
-    public class Jugador
+    public class Personaje
     {
-        public TipoJugador Tipo { get; set; }
+        public TipoPersonaje Tipo { get; set; }
         public string Nombre { get; set; }
         public string Apodo { get; set; }
         public DateTime FechaDeNacimiento { get; set; }
@@ -38,7 +38,7 @@ namespace Proyecto
 
         private static readonly Random random = new Random();
 
-        public Jugador(TipoJugador tipo, string nombre, string apodo, DateTime fechaDeNacimiento)
+        public Personaje(TipoPersonaje tipo, string nombre, string apodo, DateTime fechaDeNacimiento)
         {
             Tipo = tipo;
             Nombre = nombre;
@@ -57,7 +57,7 @@ namespace Proyecto
             return random.Next(min, max + 1);
         }
 
-        public void MostrarJugador()
+        public void MostrarPersonaje()
         {
             Console.WriteLine($"Bienvenido, {Nombre} ({Apodo})! Tu partida ha comenzado.");
             Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");

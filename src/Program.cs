@@ -5,17 +5,6 @@ namespace Proyecto
   public class Program
   {
 
-    public static readonly string[] Tipos =
-    {
-      "Guerrero",
-      "Caballero",
-      "Bandido",
-      "Clerigo",
-      "Marginado",
-      "Asesino",
-      "Hechicero"
-    };
-
     public static void Main()
     {
       Inicio();
@@ -76,33 +65,28 @@ namespace Proyecto
       } while (!fechaValida);
 
       Console.WriteLine("Eliga un tipo:");
-      foreach (var tipo in Enum.GetValues(typeof(TipoJugador)))
+      foreach (var tipo in Enum.GetValues(typeof(TipoPersonaje)))
       {
         Console.WriteLine($"{(int)tipo} - {tipo}");
       }
 
-      TipoJugador tipoSeleccionado;
+      TipoPersonaje tipoSeleccionado;
       bool tipoValido = false;
       do
       {
         string input = Console.ReadLine();
-        tipoValido = Enum.TryParse(input, out tipoSeleccionado) && Enum.IsDefined(typeof(TipoJugador), tipoSeleccionado);
+        tipoValido = Enum.TryParse(input, out tipoSeleccionado) && Enum.IsDefined(typeof(TipoPersonaje), tipoSeleccionado);
         if (!tipoValido)
         {
           Console.WriteLine("Tipo inválido, por favor intenta de nuevo.");
         }
       } while (!tipoValido);
 
-      Jugador nuevoJugador = new Jugador(tipoSeleccionado, nombre, apodo, fechaDeNacimiento);
+      Personaje nuevoPersonaje = new Personaje(tipoSeleccionado, nombre, apodo, fechaDeNacimiento);
 
       Console.Clear();
-      nuevoJugador.MostrarJugador();
-      Console.ReadKey();
-      List<Jugador> jugadores = FabricaDePersonajes.ListaDePersonajes(8);
-      foreach (var jugador in jugadores)
-      {
-        jugador.MostrarJugador();
-      }
+      nuevoPersonaje.MostrarPersonaje();
+
       //! hacer la logica del combate
     }
   }

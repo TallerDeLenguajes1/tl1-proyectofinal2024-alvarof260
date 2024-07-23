@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Proyecto
 {
@@ -10,14 +11,14 @@ namespace Proyecto
         private static List<string> nombresUsados = new List<string>();
         private static List<string> apodosUsados = new List<string>();
 
-        public static List<Jugador> ListaDePersonajes(int cantidad)
+        public static List<Personaje> ListaDePersonajes(int cantidad)
         {
             if (cantidad > nombresDisponibles.Length || cantidad > apodosDisponibles.Length)
             {
                 throw new ArgumentException("La cantidad de personajes solicitados excede la cantidad de nombres, apodos o tipos disponibles.");
             }
 
-            List<Jugador> personajes = new List<Jugador>();
+            List<Personaje> personajes = new List<Personaje>();
             for (int i = 0; i < cantidad; i++)
             {
                 personajes.Add(CrearPersonaje());
@@ -25,10 +26,10 @@ namespace Proyecto
             return personajes;
         }
 
-        public static Jugador CrearPersonaje()
+        public static Personaje CrearPersonaje()
         {
-            var tipos = Enum.GetValues(typeof(TipoJugador));
-            TipoJugador tipo = (TipoJugador)tipos.GetValue(random.Next(tipos.Length));
+            var tipos = Enum.GetValues(typeof(TipoPersonaje));
+            TipoPersonaje tipo = (TipoPersonaje)tipos.GetValue(random.Next(tipos.Length));
 
             string nombre;
             do
@@ -45,7 +46,7 @@ namespace Proyecto
             apodosUsados.Add(apodo);
 
             DateTime fechaDeNacimiento = GenerarFecha();
-            return new Jugador(tipo, nombre, apodo, fechaDeNacimiento);
+            return new Personaje(tipo, nombre, apodo, fechaDeNacimiento);
         }
 
         public static DateTime GenerarFecha()
