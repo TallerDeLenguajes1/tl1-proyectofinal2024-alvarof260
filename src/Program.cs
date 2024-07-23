@@ -85,7 +85,28 @@ namespace Proyecto
       Personaje nuevoPersonaje = new Personaje(tipoSeleccionado, nombre, apodo, fechaDeNacimiento);
 
       Console.Clear();
+
       nuevoPersonaje.MostrarPersonaje();
+      Console.ReadKey();
+
+      List<Personaje> personajes;
+
+      if (PersonajesJson.Existe("personajes.json"))
+      {
+        personajes = PersonajesJson.LeerPersonajes("personajes.json");
+      }
+      else
+      {
+        personajes = FabricaDePersonajes.ListaDePersonajes(8);
+        PersonajesJson.GuardarPersonajes(personajes, "personajes.json");
+      }
+
+      foreach (var personaje in personajes)
+      {
+        personaje.MostrarPersonaje();
+      }
+
+
 
       //! hacer la logica del combate
     }

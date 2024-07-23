@@ -59,7 +59,7 @@ namespace Proyecto
 
         public void MostrarPersonaje()
         {
-            Console.WriteLine($"Bienvenido, {Nombre} ({Apodo})! Tu partida ha comenzado.");
+            Console.WriteLine($"{Nombre} ({Apodo})");
             Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");
             Console.WriteLine($"Edad: {Edad}");
             Console.WriteLine($"Tipo: {Tipo}");
