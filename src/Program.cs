@@ -13,10 +13,11 @@ namespace Proyecto
     public static void Inicio()
     {
       Console.Clear();
+      //? MENU PRINCIPAL
       Menu.MenuPrincipal();
       int opcion = ManejoDeEntrada.LeerOpcionMenu();
 
-
+      //? CONTROL DE OPCIONES
       switch (opcion)
       {
         case 1:
@@ -34,52 +35,24 @@ namespace Proyecto
 
     public static void CrearPartida()
     {
-      Console.WriteLine("Ingrese un nombre: ");
-      string nombre = Console.ReadLine();
+      //? DATOS DEL PERSONAJE NUEVO
+      string nombre = ManejoDeEntrada.LeerEntrada("Ingrese un nombre: ");
+      string apodo = ManejoDeEntrada.LeerEntrada("Ingrese un apodo: ");
+      DateTime fechaDeNacimiento = ManejoDeEntrada.LeerFecha("Ingrese la Fecha de nacimiento: (dd/mm/yyyy)");
+      Mostrar.MostrarTipos();
+      TipoPersonaje tipoSeleccionado = ManejoDeEntrada.LeerTipo();
 
-      Console.WriteLine("Ingrese un apodo:");
-      string apodo = Console.ReadLine();
-
-      DateTime fechaDeNacimiento;
-      bool fechaValida = false;
-      do
-      {
-        Console.WriteLine("Ingrese la fecha de nacimiento (dd/mm/yyyy)");
-        string fechaInput = Console.ReadLine();
-        fechaValida = DateTime.TryParseExact(fechaInput, "dd/MM/yyyy", null, System.Globalization.DateTimeStyles.None, out fechaDeNacimiento);
-        if (!fechaValida)
-        {
-          Console.WriteLine("Fecha inválida, por favor intenta de nuevo.");
-        }
-      } while (!fechaValida);
-
-      Console.WriteLine("Eliga un tipo:");
-      foreach (var tipo in Enum.GetValues(typeof(TipoPersonaje)))
-      {
-        Console.WriteLine($"{(int)tipo} - {tipo}");
-      }
-
-      TipoPersonaje tipoSeleccionado;
-      bool tipoValido = false;
-      do
-      {
-        string input = Console.ReadLine();
-        tipoValido = Enum.TryParse(input, out tipoSeleccionado) && Enum.IsDefined(typeof(TipoPersonaje), tipoSeleccionado);
-        if (!tipoValido)
-        {
-          Console.WriteLine("Tipo inválido, por favor intenta de nuevo.");
-        }
-      } while (!tipoValido);
-
+      //? CREAR PERSONAJE
       Personaje nuevoPersonaje = new Personaje(tipoSeleccionado, nombre, apodo, fechaDeNacimiento);
 
       Console.Clear();
-
-      nuevoPersonaje.MostrarPersonaje();
+      Mostrar.MostrarPersonaje(nuevoPersonaje);
       Console.ReadKey();
 
+      //? PERSONAJES RIVALES
       List<Personaje> personajes;
 
+      //? VERIFICAR SI EXISTE PERSONAJE RIVALES
       if (PersonajesJson.Existe("personajes.json"))
       {
         personajes = PersonajesJson.LeerPersonajes("personajes.json");
@@ -92,12 +65,11 @@ namespace Proyecto
 
       foreach (var personaje in personajes)
       {
-        personaje.MostrarPersonaje();
+        Mostrar.MostrarPersonaje(personaje);
+        Console.WriteLine();
       }
 
-
-
-      //! hacer la logica del combate
+      //? TODO: hacer la logica del combate
     }
   }
 }

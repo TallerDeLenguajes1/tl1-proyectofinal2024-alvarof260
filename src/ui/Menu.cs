@@ -9,5 +9,7 @@ namespace Proyecto
             Console.WriteLine("2 - Historial");
             Console.WriteLine("3 - Salir");
         }
+
+        
     }
 }

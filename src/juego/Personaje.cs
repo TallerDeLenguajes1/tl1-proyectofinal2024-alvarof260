@@ -56,19 +56,5 @@ namespace Proyecto
         {
             return random.Next(min, max + 1);
         }
-
-        public void MostrarPersonaje()
-        {
-            Console.WriteLine($"{Nombre} ({Apodo})");
-            Console.WriteLine($"Fecha de Nacimiento: {FechaDeNacimiento.ToShortDateString()}");
-            Console.WriteLine($"Edad: {Edad}");
-            Console.WriteLine($"Tipo: {Tipo}");
-            Console.WriteLine($"Velocidad: {Velocidad}");
-            Console.WriteLine($"Destreza: {Destreza}");
-            Console.WriteLine($"Fuerza: {Fuerza}");
-            Console.WriteLine($"Nivel: {Nivel}");
-            Console.WriteLine($"Armadura: {Armadura}");
-            Console.WriteLine($"Salud: {Salud}");
-        }
     }
 }
