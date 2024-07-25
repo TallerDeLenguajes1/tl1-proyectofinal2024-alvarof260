@@ -36,6 +36,11 @@ namespace Proyecto
         {
             return File.Exists(nombreArchivo) && new FileInfo(nombreArchivo).Length > 0;
         }
+
+        public static void BorrarArchivo(string nombreArchivo)
+        {
+            File.Delete(nombreArchivo);
+        }
     }
 
     public class HistorialJson

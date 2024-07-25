@@ -34,7 +34,7 @@ namespace Proyecto
         public int Fuerza { get; set; }
         public int Nivel { get; set; }
         public int Armadura { get; set; }
-        public int Salud { get; private set; } = 100;
+        public int Salud { get; set; } = 100;
 
         private static readonly Random random = new Random();
 
@@ -55,6 +55,28 @@ namespace Proyecto
         public static int GenerarStats(int min, int max)
         {
             return random.Next(min, max + 1);
+        }
+
+        public void Atacar(Personaje rival)
+        {
+            int ataque = Destreza * Fuerza * Nivel;
+            int efectividad = random.Next(1, 101);
+            int defensa = rival.Armadura * rival.Velocidad;
+            const int constanteAjuste = 450;
+            int danio = (ataque * efectividad - defensa) / constanteAjuste;
+
+            if (danio < 0)
+                danio = 0;
+
+            if (rival.Salud - danio < 0)
+                rival.Salud = 0;
+            else
+                rival.Salud -= danio;
+
+            Console.WriteLine($"{rival.Nombre} ha recibido {danio} de danio");
+            Console.WriteLine($"{rival.Nombre} tiene {rival.Salud} de salud");
+            Console.WriteLine("--------------------------");
+            Console.ReadKey();
         }
     }
 }

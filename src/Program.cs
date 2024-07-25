@@ -21,7 +21,7 @@ namespace Proyecto
       switch (opcion)
       {
         case 1:
-          CrearPartida();
+          NuevaPartida();
           break;
         case 2:
           //! FALTA HACER EL CONTROL DE PARTIDAS
@@ -33,7 +33,7 @@ namespace Proyecto
       }
     }
 
-    public static void CrearPartida()
+    public static void NuevaPartida()
     {
       //? DATOS DEL PERSONAJE NUEVO
       string nombre = ManejoDeEntrada.LeerEntrada("Ingrese un nombre: ");
@@ -59,7 +59,7 @@ namespace Proyecto
       }
       else
       {
-        personajes = FabricaDePersonajes.ListaDePersonajes(8);
+        personajes = FabricaDePersonajes.ListaDePersonajes(1);
         PersonajesJson.GuardarPersonajes(personajes, "personajes.json");
       }
 
@@ -70,6 +70,7 @@ namespace Proyecto
       }
 
       //? TODO: hacer la logica del combate
+      LogicaJuego.Partida(nuevoPersonaje, personajes);
     }
   }
 }
