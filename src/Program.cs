@@ -31,6 +31,7 @@ namespace Proyecto
     public static void NuevaPartida()
     {
       //? DATOS DEL PERSONAJE NUEVO
+      Console.Clear();
       string nombre = ManejoDeEntrada.LeerEntrada("Ingrese un nombre: ");
       string apodo = ManejoDeEntrada.LeerEntrada("Ingrese un apodo: ");
       DateTime fechaDeNacimiento = ManejoDeEntrada.LeerFecha("Ingrese la Fecha de nacimiento: (dd/mm/yyyy)");

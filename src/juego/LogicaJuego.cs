@@ -27,8 +27,13 @@ namespace Proyecto
         {
             int saludInicial = jugador.Salud;
             int danio;
+            Console.WriteLine("Combate entre " + jugador.Nombre + " y " + rival.Nombre);
+
             while (jugador.Salud > 0 && rival.Salud > 0)
             {
+                jugador.Mostrar();
+                Console.WriteLine("--------------------------");
+                rival.Mostrar();
                 Console.WriteLine("Turno de " + jugador.Nombre);
 
                 danio = jugador.Atacar(rival.Armadura, rival.Velocidad);
@@ -39,6 +44,7 @@ namespace Proyecto
                     Console.WriteLine($"{rival.Nombre} ha sido derrotado");
                     break;
                 }
+                Console.ReadKey();
 
                 Console.WriteLine("Turno de " + rival.Nombre);
 
@@ -50,6 +56,9 @@ namespace Proyecto
                     Console.WriteLine($"{jugador.Nombre} ha sido derrotado");
                     break;
                 }
+
+                Console.ReadKey();
+                Console.Clear();
             }
             if (jugador.Salud > 0)
             {
