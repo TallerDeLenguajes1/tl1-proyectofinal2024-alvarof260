@@ -10,8 +10,7 @@ namespace Proyecto
       //? todo: hacer que cuando termine la partida vuelva al menu.
       Console.Clear();
       //? MENU PRINCIPAL
-      Menu.MenuPrincipal();
-      int opcion = ManejoDeEntrada.LeerOpcionMenu();
+      int opcion = Menu.MenuPrincipal();
 
       //? CONTROL DE OPCIONES
       switch (opcion)
