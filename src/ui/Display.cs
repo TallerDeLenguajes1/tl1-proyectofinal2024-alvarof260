@@ -2,6 +2,7 @@ namespace Proyecto
 {
     public class Mostrar
     {
+        // ! cambiar este metodo
         public static void MostrarPersonaje(Personaje personaje)
         {
             Console.WriteLine($"{personaje.Nombre} ({personaje.Apodo})");

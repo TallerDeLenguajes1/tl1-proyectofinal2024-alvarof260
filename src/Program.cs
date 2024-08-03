@@ -7,11 +7,7 @@ namespace Proyecto
 
     public static void Main()
     {
-      Inicio();
-    }
-
-    public static void Inicio()
-    {
+      //? todo: hacer que cuando termine la partida vuelva al menu.
       Console.Clear();
       //? MENU PRINCIPAL
       Menu.MenuPrincipal();
@@ -46,7 +42,8 @@ namespace Proyecto
       Personaje nuevoPersonaje = new Personaje(tipoSeleccionado, nombre, apodo, fechaDeNacimiento);
 
       Console.Clear();
-      Mostrar.MostrarPersonaje(nuevoPersonaje);
+      // metodo de personaje
+      nuevoPersonaje.Mostrar();
       Console.ReadKey();
 
       //? PERSONAJES RIVALES
@@ -59,13 +56,13 @@ namespace Proyecto
       }
       else
       {
-        personajes = FabricaDePersonajes.ListaDePersonajes(1);
+        personajes = FabricaDePersonajes.ListaDePersonajes(8);
         PersonajesJson.GuardarPersonajes(personajes, "personajes.json");
       }
 
       foreach (var personaje in personajes)
       {
-        Mostrar.MostrarPersonaje(personaje);
+        personaje.Mostrar();
         Console.WriteLine();
       }
 

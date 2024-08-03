@@ -10,6 +10,6 @@ namespace Proyecto
             Console.WriteLine("3 - Salir");
         }
 
-        
+
     }
 }
