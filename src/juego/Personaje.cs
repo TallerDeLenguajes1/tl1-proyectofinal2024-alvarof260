@@ -4,7 +4,7 @@ namespace Proyecto
 {
     public enum TipoPersonaje
     {
-        Guerrero = 1,
+        Guerrero,
         Caballero,
         Bandido,
         Clerigo,
@@ -14,11 +14,11 @@ namespace Proyecto
     }
     public class Personaje
     {
-        public TipoPersonaje Tipo;
-        public string Nombre;
-        public string Apodo;
-        public DateTime FechaDeNacimiento;
-        public int Edad;
+        public TipoPersonaje Tipo { get; }
+        public string Nombre { get; }
+        public string Apodo { get; }
+        public DateTime FechaDeNacimiento { get; }
+        public int Edad { get; }
 
         public int Velocidad { get; set; }
         public int Destreza { get; set; }
@@ -70,10 +70,6 @@ namespace Proyecto
                 danio = 0;
 
             return danio;
-            /* Console.WriteLine($"{nombre} ha recibido {danio} de danio");
-            Console.WriteLine($"{nombre} tiene {salud} de salud");
-            Console.WriteLine("--------------------------");
-            Console.ReadKey(); */
         }
 
         public void Mostrar()
@@ -90,7 +86,7 @@ namespace Proyecto
             Console.WriteLine($"Salud: {Salud}");
         }
 
-        //? todo: quita vida.
+
         public void RecibirDanio(int danio)
         {
             if (Salud - danio <= 0)
@@ -99,31 +95,24 @@ namespace Proyecto
                 Salud -= danio;
         }
 
-        //? todo: mejorar estadisticas.
         public void MejorarEstadisticas()
         {
+            Console.Clear();
             Console.WriteLine($"{Nombre} ({Apodo}) puede mejorar tus habilidades");
             Console.WriteLine("¿Que habilidad quieres mejorar?");
-            Console.ReadKey();
-            Console.WriteLine("1. Destreza");
-            Console.WriteLine("2. Fuerza");
-            Console.WriteLine("3. Nivel");
-            Console.WriteLine("4. Armadura");
-            Console.WriteLine("5. Velocidad");
 
             int opcion;
-            string input;
-            bool seleccionado;
+            bool seleccionado = false;
             do
             {
-                input = Console.ReadLine();
-                seleccionado = int.TryParse(input, out opcion);
+                opcion = Menu.Menuu(new string[] { "Velocidad", "Destreza", "Nivel", "Armadura", "Fuerza" });
                 switch (opcion)
                 {
                     case 1:
                         if (Destreza < 10)
                         {
                             Destreza++;
+                            seleccionado = true;
                         }
                         else
                         {
@@ -135,6 +124,8 @@ namespace Proyecto
                         if (Fuerza < 10)
                         {
                             Fuerza++;
+                            seleccionado = true;
+
                         }
                         else
                         {
@@ -147,16 +138,22 @@ namespace Proyecto
                         {
                             Nivel++;
                             Salud += 15;
+                            seleccionado = true;
+
                         }
                         else
                         {
                             Salud += 20;
+                            seleccionado = true;
+
                         }
                         break;
                     case 4:
                         if (Armadura < 10)
                         {
                             Armadura++;
+                            seleccionado = true;
+
                         }
                         else
                         {
@@ -168,6 +165,8 @@ namespace Proyecto
                         if (Velocidad < 10)
                         {
                             Velocidad++;
+                            seleccionado = true;
+
                         }
                         else
                         {
@@ -179,7 +178,7 @@ namespace Proyecto
                         Console.WriteLine("Opción inválida");
                         break;
                 }
-            } while (!seleccionado || (opcion < 1 || opcion > 5));
+            } while (!seleccionado);
         }
     }
 }

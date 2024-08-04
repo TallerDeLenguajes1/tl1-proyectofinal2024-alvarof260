@@ -2,22 +2,7 @@ namespace Proyecto
 {
     public class Menu
     {
-        const string LogoAscii = @"
-░█████╗░░█████╗░███╗░░██╗░██████╗░██╗░░░██╗██╗░██████╗████████╗░█████╗░  ██╗░░░██╗
-██╔══██╗██╔══██╗████╗░██║██╔═══██╗██║░░░██║██║██╔════╝╚══██╔══╝██╔══██╗  ╚██╗░██╔╝
-██║░░╚═╝██║░░██║██╔██╗██║██║██╗██║██║░░░██║██║╚█████╗░░░░██║░░░███████║  ░╚████╔╝░
-██║░░██╗██║░░██║██║╚████║╚██████╔╝██║░░░██║██║░╚═══██╗░░░██║░░░██╔══██║  ░░╚██╔╝░░
-╚█████╔╝╚█████╔╝██║░╚███║░╚═██╔═╝░╚██████╔╝██║██████╔╝░░░██║░░░██║░░██║  ░░░██║░░░
-░╚════╝░░╚════╝░╚═╝░░╚══╝░░░╚═╝░░░░╚═════╝░╚═╝╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░
-
-████████╗██████╗░██╗██╗░░░██╗███╗░░██╗███████╗░█████╗░
-╚══██╔══╝██╔══██╗██║██║░░░██║████╗░██║██╔════╝██╔══██╗
-░░░██║░░░██████╔╝██║██║░░░██║██╔██╗██║█████╗░░███████║
-░░░██║░░░██╔══██╗██║██║░░░██║██║╚████║██╔══╝░░██╔══██║
-░░░██║░░░██║░░██║██║╚██████╔╝██║░╚███║██║░░░░░██║░░██║
-░░░╚═╝░░░╚═╝░░╚═╝╚═╝░╚═════╝░╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝";
-
-        static void LogoCentrado(string text)
+        public static void LogoCentrado(string text)
         {
             string[] lines = text.Split(new[] { '\n' }, StringSplitOptions.None);
             int windowWidth = Console.WindowWidth;
@@ -37,11 +22,11 @@ namespace Proyecto
             }
         }
 
-        public static int MenuPrincipal()
+        /*Console.ForegroundColor = ConsoleColor.Cyan;
+                   LogoCentrado(LogoAscii);
+                   Console.ResetColor(); */
+        public static int Menuu(string[] opciones)
         {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            LogoCentrado(LogoAscii);
-            Console.ResetColor();
             (int left, int top) = Console.GetCursorPosition();
             bool esSeleccionado = false;
             ConsoleKeyInfo tecla;
@@ -50,14 +35,13 @@ namespace Proyecto
             {
                 int currentTop = top;
 
-                ClearLine(left, currentTop);
-                ClearLine(left, currentTop + 1);
-                ClearLine(left, currentTop + 2);
+                ClearLine(left, currentTop, opciones.Length);
                 Console.SetCursorPosition(left, top);
 
-                MostrarOpcion(Console.WindowWidth, "Nueva Partida", opcion == 1);
-                MostrarOpcion(Console.WindowWidth, "Cargar Partida", opcion == 2);
-                MostrarOpcion(Console.WindowWidth, "Salir", opcion == 3);
+                for (int i = 0; i < opciones.Length; i++)
+                {
+                    MostrarOpcion(Console.WindowWidth, opciones[i], opcion == i + 1);
+                }
 
                 tecla = Console.ReadKey(true);
 
@@ -67,13 +51,13 @@ namespace Proyecto
                         if (opcion > 1) opcion--;
                         break;
                     case ConsoleKey.DownArrow:
-                        if (opcion < 3) opcion++;
+                        if (opcion < opciones.Length) opcion++;
                         break;
                     case ConsoleKey.Enter:
                         esSeleccionado = true;
                         break;
                 }
-                Console.WriteLine("Seleccionaste la opcion " + opcion);
+                Console.WriteLine(opcion);
             }
             return opcion;
         }
@@ -84,26 +68,30 @@ namespace Proyecto
             Console.WriteLine(text.PadLeft(position + text.Length));
         }
 
-        private static void ClearLine(int left, int top)
+        private static void MostrarOpcion(int anchoVentana, string opcion, bool seleccionada)
         {
-            Console.SetCursorPosition(left, top);
-            Console.WriteLine(new string(' ', Console.WindowWidth));
+            string texto = seleccionada ? $"> {opcion} <" : opcion;
+            int padding = (anchoVentana - texto.Length) / 2;
+            string linea = texto.PadLeft(padding + texto.Length).PadRight(anchoVentana);
+            Console.WriteLine(linea);
         }
 
-        public static void MostrarOpcion(int width, string text, bool esSeleccionado)
+        private static void ClearLine(int left, int top, int numLines)
         {
-            string textWithArrow = esSeleccionado ? "-> " + text : "   " + text;
-            if (esSeleccionado)
+            for (int i = 0; i < numLines; i++)
             {
-                Console.ForegroundColor = ConsoleColor.Magenta; // Cambiar el color de la opción seleccionada
+                Console.SetCursorPosition(left, top + i);
+                Console.Write(new string(' ', Console.WindowWidth));
             }
+        }
 
-            TextoCentrado(width, textWithArrow);
-
-            if (esSeleccionado)
-            {
-                Console.ResetColor(); // Restablecer el color después de pintar la opción seleccionada
-            }
+        public static TipoPersonaje MenuTipo()
+        {
+            Console.WriteLine("Eliga un tipo:");
+            string[] tipos = Enum.GetNames(typeof(TipoPersonaje));
+            int opcion = Menuu(tipos);
+            TipoPersonaje tipoSeleccionado = (TipoPersonaje)Enum.Parse(typeof(TipoPersonaje), tipos[opcion - 1]);
+            return tipoSeleccionado;
         }
     }
 }

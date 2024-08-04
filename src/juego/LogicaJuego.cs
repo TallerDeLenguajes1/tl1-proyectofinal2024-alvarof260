@@ -12,6 +12,7 @@ namespace Proyecto
                 if (jugador.Salud <= 0)
                 {
                     Console.WriteLine("Has Perdido");
+                    Console.ReadKey();
                     break;
                 }
             }
@@ -19,6 +20,7 @@ namespace Proyecto
             {
                 Console.WriteLine("Has Ganado");
                 HistorialJson.GuardarGanador(jugador, "ganadores.json");
+                Console.ReadKey();
             }
             PersonajesJson.BorrarArchivo("personajes.json");
         }

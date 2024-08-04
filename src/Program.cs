@@ -9,17 +9,35 @@ namespace Proyecto
     {
       //? todo: hacer que cuando termine la partida vuelva al menu.
       Console.Clear();
-      //? MENU PRINCIPAL
-      int opcion = Menu.MenuPrincipal();
+      // MENU PRINCIPAL
+      Console.ForegroundColor = ConsoleColor.Magenta;
+      string LogoAscii = @"
+░█████╗░░█████╗░███╗░░██╗░██████╗░██╗░░░██╗██╗░██████╗████████╗░█████╗░  ██╗░░░██╗
+██╔══██╗██╔══██╗████╗░██║██╔═══██╗██║░░░██║██║██╔════╝╚══██╔══╝██╔══██╗  ╚██╗░██╔╝
+██║░░╚═╝██║░░██║██╔██╗██║██║██╗██║██║░░░██║██║╚█████╗░░░░██║░░░███████║  ░╚████╔╝░
+██║░░██╗██║░░██║██║╚████║╚██████╔╝██║░░░██║██║░╚═══██╗░░░██║░░░██╔══██║  ░░╚██╔╝░░
+╚█████╔╝╚█████╔╝██║░╚███║░╚═██╔═╝░╚██████╔╝██║██████╔╝░░░██║░░░██║░░██║  ░░░██║░░░
+░╚════╝░░╚════╝░╚═╝░░╚══╝░░░╚═╝░░░░╚═════╝░╚═╝╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░
 
-      //? CONTROL DE OPCIONES
+████████╗██████╗░██╗██╗░░░██╗███╗░░██╗███████╗░█████╗░
+╚══██╔══╝██╔══██╗██║██║░░░██║████╗░██║██╔════╝██╔══██╗
+░░░██║░░░██████╔╝██║██║░░░██║██╔██╗██║█████╗░░███████║
+░░░██║░░░██╔══██╗██║██║░░░██║██║╚████║██╔══╝░░██╔══██║
+░░░██║░░░██║░░██║██║╚██████╔╝██║░╚███║██║░░░░░██║░░██║
+░░░╚═╝░░░╚═╝░░╚═╝╚═╝░╚═════╝░╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝";
+
+      Menu.LogoCentrado(LogoAscii);
+      Console.ResetColor();
+      int opcion = Menu.Menuu(["Jugar", "Ganadores", "Salir"]);
+
+      // CONTROL DE OPCIONES
       switch (opcion)
       {
         case 1:
           NuevaPartida();
           break;
         case 2:
-          //! FALTA HACER EL CONTROL DE PARTIDAS
+          MostrarGanadores();
           break;
         case 3:
           Console.WriteLine("Saliendo del juego...");
@@ -30,15 +48,15 @@ namespace Proyecto
 
     public static void NuevaPartida()
     {
-      //? DATOS DEL PERSONAJE NUEVO
+      // DATOS DEL PERSONAJE NUEVO
       Console.Clear();
       string nombre = ManejoDeEntrada.LeerEntrada("Ingrese un nombre: ");
       string apodo = ManejoDeEntrada.LeerEntrada("Ingrese un apodo: ");
       DateTime fechaDeNacimiento = ManejoDeEntrada.LeerFecha("Ingrese la Fecha de nacimiento: (dd/mm/yyyy)");
-      Mostrar.MostrarTipos();
-      TipoPersonaje tipoSeleccionado = ManejoDeEntrada.LeerTipo();
+      TipoPersonaje tipoSeleccionado = Menu.MenuTipo();
 
-      //? CREAR PERSONAJE
+
+      // CREAR PERSONAJE
       Personaje nuevoPersonaje = new Personaje(tipoSeleccionado, nombre, apodo, fechaDeNacimiento);
 
       Console.Clear();
@@ -46,10 +64,10 @@ namespace Proyecto
       nuevoPersonaje.Mostrar();
       Console.ReadKey();
 
-      //? PERSONAJES RIVALES
+      // PERSONAJES RIVALES
       List<Personaje> personajes;
 
-      //? VERIFICAR SI EXISTE PERSONAJE RIVALES
+      // VERIFICAR SI EXISTE PERSONAJE RIVALES
       if (PersonajesJson.Existe("personajes.json"))
       {
         personajes = PersonajesJson.LeerPersonajes("personajes.json");
@@ -63,11 +81,31 @@ namespace Proyecto
       foreach (var personaje in personajes)
       {
         personaje.Mostrar();
-        Console.WriteLine();
+        Console.WriteLine("------------------------------");
+        Console.ReadKey();
       }
 
-      //? TODO: hacer la logica del combate
       LogicaJuego.Partida(nuevoPersonaje, personajes);
     }
+
+    public static void MostrarGanadores()
+    {
+      Console.Clear();
+      List<Personaje> ganadores = HistorialJson.LeerGanadores("ganadores.json");
+      if (ganadores.Count == 0)
+      {
+        Console.WriteLine("No hay ganadores aún.");
+        Console.ReadKey();
+        return;
+      }
+
+      Console.WriteLine("Ganadores:");
+      foreach (var ganador in ganadores)
+      {
+        ganador.Mostrar();
+      }
+      Console.ReadKey();
+    }
   }
+
 }
