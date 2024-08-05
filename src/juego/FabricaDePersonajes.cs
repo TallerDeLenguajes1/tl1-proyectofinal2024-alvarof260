@@ -8,8 +8,10 @@ namespace Proyecto
         private static readonly Random random = new Random();
         private static string[] nombresDisponibles = { "Pedro", "Radamel", "Fausto", "Maximiliano", "Hades", "Leonel", "Lucio", "Gerard" };
         private static string[] apodosDisponibles = { "El Bravo", "El Elfo", "El Enano", "El Portador", "El Gris", "La cobra", "El Toro", "El Rayo" };
+        private static string[] tiposDisponibles = { "Guerrero", "Caballero", "Bandido", "Clerigo", "Marginado", "Asesino", "Hechicero", "Ladron" };
         private static List<string> nombresUsados = new List<string>();
         private static List<string> apodosUsados = new List<string>();
+        private static List<string> tiposUsados = new List<string>();
 
         public static List<Personaje> ListaDePersonajes(int cantidad)
         {
@@ -28,8 +30,12 @@ namespace Proyecto
 
         public static Personaje CrearPersonaje()
         {
-            var tipos = Enum.GetValues(typeof(TipoPersonaje));
-            TipoPersonaje tipo = (TipoPersonaje)tipos.GetValue(random.Next(tipos.Length));
+            string tipo;
+            do
+            {
+                tipo = tiposDisponibles[random.Next(tiposDisponibles.Length)];
+            } while (tiposUsados.Contains(tipo));
+            tiposUsados.Add(tipo);
 
             string nombre;
             do

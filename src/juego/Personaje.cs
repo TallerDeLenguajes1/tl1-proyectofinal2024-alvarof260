@@ -14,7 +14,7 @@ namespace Proyecto
     }
     public class Personaje
     {
-        public TipoPersonaje Tipo { get; }
+        public string Tipo { get; }
         public string Nombre { get; }
         public string Apodo { get; }
         public DateTime FechaDeNacimiento { get; }
@@ -29,7 +29,7 @@ namespace Proyecto
 
         private static readonly Random random = new Random();
 
-        public Personaje(TipoPersonaje tipo, string nombre, string apodo, DateTime fechaDeNacimiento)
+        public Personaje(string tipo, string nombre, string apodo, DateTime fechaDeNacimiento)
         {
             Tipo = tipo;
             Nombre = nombre;

@@ -5,8 +5,10 @@ namespace Proyecto
   public class Program
   {
 
-    public static void Main()
+    public static string[] tipos = { "Guerrero", "Caballero", "Clerigo", "Asesino", "Hechicero", "Marginado", "Bandido", "Ladron" };
+    public static async Task Main()
     {
+
       //? todo: hacer que cuando termine la partida vuelva al menu.
       Console.Clear();
       // MENU PRINCIPAL
@@ -34,7 +36,7 @@ namespace Proyecto
       switch (opcion)
       {
         case 1:
-          NuevaPartida();
+          await NuevaPartida();
           break;
         case 2:
           MostrarGanadores();
@@ -46,14 +48,29 @@ namespace Proyecto
       }
     }
 
-    public static void NuevaPartida()
+    public static async Task NuevaPartida()
     {
       // DATOS DEL PERSONAJE NUEVO
       Console.Clear();
       string nombre = ManejoDeEntrada.LeerEntrada("Ingrese un nombre: ");
+      try
+      {
+        Genero genero = await ConsumirApi.GetGenderByNameAsync(nombre);
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine($"Probabilidad: {genero.Probability}");
+        Console.WriteLine($"Genero:" + (genero.Gender == "male" ? "Masculino" : "Femenino"));
+        Console.ResetColor();
+      }
+      catch (System.Exception)
+      {
+        Console.WriteLine("Error al consumir la API de Genderize.");
+      }
+
       string apodo = ManejoDeEntrada.LeerEntrada("Ingrese un apodo: ");
       DateTime fechaDeNacimiento = ManejoDeEntrada.LeerFecha("Ingrese la Fecha de nacimiento: (dd/mm/yyyy)");
-      TipoPersonaje tipoSeleccionado = Menu.MenuTipo();
+      int opcion = Menu.Menuu(tipos);
+
+      string tipoSeleccionado = tipos[opcion];
 
 
       // CREAR PERSONAJE

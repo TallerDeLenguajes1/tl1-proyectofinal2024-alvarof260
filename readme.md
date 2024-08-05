@@ -65,3 +65,7 @@ El juego luego genera una lista de rivales aleatorios y comienza el combate.
 ## Historial de Ganadores
 
 El historial de ganadores se guarda en un archivo JSON y se puede consultar desde el menú principal.
+
+## Uso de la API de Genderize
+
+El proyecto utiliza la API de Genderize para determinar el género del personaje basado en su nombre.

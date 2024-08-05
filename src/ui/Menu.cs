@@ -84,14 +84,5 @@ namespace Proyecto
                 Console.Write(new string(' ', Console.WindowWidth));
             }
         }
-
-        public static TipoPersonaje MenuTipo()
-        {
-            Console.WriteLine("Eliga un tipo:");
-            string[] tipos = Enum.GetNames(typeof(TipoPersonaje));
-            int opcion = Menuu(tipos);
-            TipoPersonaje tipoSeleccionado = (TipoPersonaje)Enum.Parse(typeof(TipoPersonaje), tipos[opcion - 1]);
-            return tipoSeleccionado;
-        }
     }
 }
