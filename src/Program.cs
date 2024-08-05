@@ -8,12 +8,14 @@ namespace Proyecto
     public static string[] tipos = { "Guerrero", "Caballero", "Clerigo", "Asesino", "Hechicero", "Marginado", "Bandido", "Ladron" };
     public static async Task Main()
     {
+      while (true)
+      {
 
-      //? todo: hacer que cuando termine la partida vuelva al menu.
-      Console.Clear();
-      // MENU PRINCIPAL
-      Console.ForegroundColor = ConsoleColor.Magenta;
-      string LogoAscii = @"
+        //? todo: hacer que cuando termine la partida vuelva al menu.
+        Console.Clear();
+        // MENU PRINCIPAL
+        Console.ForegroundColor = ConsoleColor.Magenta;
+        string LogoAscii = @"
 ░█████╗░░█████╗░███╗░░██╗░██████╗░██╗░░░██╗██╗░██████╗████████╗░█████╗░  ██╗░░░██╗
 ██╔══██╗██╔══██╗████╗░██║██╔═══██╗██║░░░██║██║██╔════╝╚══██╔══╝██╔══██╗  ╚██╗░██╔╝
 ██║░░╚═╝██║░░██║██╔██╗██║██║██╗██║██║░░░██║██║╚█████╗░░░░██║░░░███████║  ░╚████╔╝░
@@ -28,23 +30,24 @@ namespace Proyecto
 ░░░██║░░░██║░░██║██║╚██████╔╝██║░╚███║██║░░░░░██║░░██║
 ░░░╚═╝░░░╚═╝░░╚═╝╚═╝░╚═════╝░╚═╝░░╚══╝╚═╝░░░░░╚═╝░░╚═╝";
 
-      Menu.LogoCentrado(LogoAscii);
-      Console.ResetColor();
-      int opcion = Menu.Menuu(["Jugar", "Ganadores", "Salir"]);
+        Menu.LogoCentrado(LogoAscii);
+        Console.ResetColor();
+        int opcion = Menu.Menuu(["Jugar", "Ganadores", "Salir"]);
 
-      // CONTROL DE OPCIONES
-      switch (opcion)
-      {
-        case 1:
-          await NuevaPartida();
-          break;
-        case 2:
-          MostrarGanadores();
-          break;
-        case 3:
-          Console.WriteLine("Saliendo del juego...");
-          Environment.Exit(0);
-          break;
+        // CONTROL DE OPCIONES
+        switch (opcion)
+        {
+          case 1:
+            await NuevaPartida();
+            break;
+          case 2:
+            MostrarGanadores();
+            break;
+          case 3:
+            Console.WriteLine("Saliendo del juego...");
+            Environment.Exit(0);
+            break;
+        }
       }
     }
 
