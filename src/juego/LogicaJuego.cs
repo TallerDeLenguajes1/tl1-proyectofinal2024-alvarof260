@@ -11,14 +11,24 @@ namespace Proyecto
 
                 if (jugador.Salud <= 0)
                 {
+                    Console.Clear();
+                    Console.WriteLine("--------------------------");
                     Console.WriteLine("Has Perdido");
+                    Console.WriteLine("Gracias por jugar");
+                    Console.WriteLine("Pulsa cualquier tecla para salir");
+                    Console.WriteLine("--------------------------");
                     Console.ReadKey();
                     break;
                 }
             }
             if (jugador.Salud > 0)
             {
+                Console.Clear();
+                Console.WriteLine("--------------------------");
                 Console.WriteLine("Has Ganado");
+                Console.WriteLine("Gracias por jugar");
+                Console.WriteLine("Pulsa cualquier tecla para salir");
+                Console.WriteLine("--------------------------");
                 HistorialJson.GuardarGanador(jugador, "ganadores.json");
                 Console.ReadKey();
             }

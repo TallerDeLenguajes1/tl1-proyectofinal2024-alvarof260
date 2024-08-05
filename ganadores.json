@@ -1,15 +1,1 @@
-[
-    {
-        "Tipo": "guerrero",
-        "Nombre": "Alvaro",
-        "Apodo": "Lao",
-        "FechaDeNacimiento": "2004-01-20T00:00:00",
-        "Edad": 20,
-        "Velocidad": 5,
-        "Destreza": 9,
-        "Fuerza": 8,
-        "Nivel": 10,
-        "Armadura": 10,
-        "Salud": 120
-    }
-]
+[{"Tipo":"guerrero","Nombre":"Alvaro","Apodo":"Lao","FechaDeNacimiento":"2004-01-20T00:00:00","Edad":20,"Velocidad":5,"Destreza":9,"Fuerza":8,"Nivel":10,"Armadura":10,"Salud":120},{"Tipo":"Asesino","Nombre":"Pedro","Apodo":"Jotape","FechaDeNacimiento":"2004-01-20T00:00:00","Edad":20,"Velocidad":6,"Destreza":6,"Fuerza":5,"Nivel":10,"Armadura":9,"Salud":215}]

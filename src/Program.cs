@@ -98,6 +98,8 @@ namespace Proyecto
         PersonajesJson.GuardarPersonajes(personajes, "personajes.json");
       }
 
+      Console.Clear();
+      Console.WriteLine("Muestra de rivales:");
       foreach (var personaje in personajes)
       {
         personaje.Mostrar();
@@ -122,7 +124,9 @@ namespace Proyecto
       Console.WriteLine("Ganadores:");
       foreach (var ganador in ganadores)
       {
+        Console.WriteLine("------------------------------");
         ganador.Mostrar();
+        Console.WriteLine("------------------------------");
       }
       Console.ReadKey();
     }
